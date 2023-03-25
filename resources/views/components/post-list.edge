@@ -1,0 +1,27 @@
+<div class="mt-10" hx-post-list>
+  <p class="text-xs text-slate-500">
+    {{ posts.length }} results
+  </p>
+  <div class="space-y-16 border-t border-gray-200 pt-10 mt-3">
+    @each (post in posts)
+      <article class="flex max-w-xl flex-col items-start justify-between">
+        <div class="flex items-center gap-x-4 text-xs">
+          <a href="#" class="relative z-10 rounded-full bg-gray-50 py-1.5 px-3 font-medium text-gray-600 hover:bg-gray-100">
+            {{ post.postType.name }}
+          </a>
+        </div>
+        <div class="group relative">
+          <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+            <a href="#">
+              <span class="absolute inset-0"></span>
+              {{ post.title }}
+            </a>
+          </h3>
+          <p class="mt-5 text-sm leading-6 text-gray-600 line-clamp-3">
+            {{ post.summary }}
+          </p>
+        </div>
+      </article>
+    @endeach
+  </div>
+</div>

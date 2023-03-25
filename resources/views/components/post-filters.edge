@@ -1,0 +1,36 @@
+@set('qs', request.qs())
+
+<form hx-post="{{ route('posts.search') }}" hx-target="[hx-post-list]" hx-swap="outerHTML" hx-trigger="input delay:500ms">
+  <div class="flex gap-6 pt-6">
+    <label class="flex-1">
+      <span class="text-xs">Search posts</span>
+      <input 
+        type="text" 
+        class="form-control" 
+        name="pattern" 
+        placeholder="Search posts ..."
+        value="{{ qs.pattern || '' }}"
+      />
+    </label>
+
+    <label>
+      <span class="text-xs">Post type</span>
+      <select name="postTypeId" class="form-select">
+        @each (type in postTypes)
+          <option value="{{ type.id }}" {{ type.id == qs.postTypeId && 'selected' }}>
+            {{ type.name }}
+          </option>
+        @endeach
+      </select>
+    </label>
+
+    <label>
+      <span class="text-xs">Sort by</span>
+      <select name="orderBy" class="form-select">
+        <option value="title_asc" {{ 'title_asc' == qs.orderBy && 'selected' }}>Title (asc)</option>
+        <option value="title_desc" {{ 'title_desc' == qs.orderBy && 'selected' }}>Title (desc)</option>
+        <option value="postTypeId_asc" {{ 'postTypeId_asc' == qs.orderBy && 'selected' }}>Post type (asc)</option>
+      </select>
+    </label>
+  </div>
+</form>
